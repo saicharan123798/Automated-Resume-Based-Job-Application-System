@@ -1,0 +1,249 @@
+[20:57:25] Cookie login successful.
+[20:57:25] Config fetch error: 'User' object has no attribute 'desired_location'
+[20:57:38]   Scrolling for jobs (Natural)...
+[20:57:56] [1/7] Agentic AI Engineer @ Xeedo Technologies
+[20:57:57]     [APPLY] Similarity (0.32) satisfies threshold. Attempting Easy Apply...
+[20:57:59]   Easy Apply button not found.
+[20:58:07] [2/7] Generative AI Engineer @ Centrilogic
+[20:58:07]     [APPLY] Similarity (0.36) satisfies threshold. Attempting Easy Apply...
+[20:58:09]   Easy Apply button detected. Clicking...
+[20:58:12]   Easy Apply wizard opened.
+[20:58:17]     [DROPDOWN] Q: 'Email address
+Email address' | A: 'saicharan@example.com' | Source: AI Fallback
+[20:58:21]     [DROPDOWN] Q: 'Phone country code
+Phone country code' | A: '+91' | Source: AI Fallback
+[20:58:23]     [>] Step 1 finished. Moving to next...
+[20:58:28]     [>] Step 2 finished. Moving to next...
+[20:58:31]     [!] Layer 1 failed: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=146.0.7680.80); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xe47c13+10dd3]
+	chromedriver!GetHandleVerifier [0xe47d44+10f04]
+	chromedriver!(No symbol) [0xc21f50]
+	chromedriver!(No symbol) [0xc28bbc]
+	chromedriver!(No symbol) [0xc2b0d2]
+	chromedriver!(No symbol) [0xcab521]
+	chromedriver!(No symbol) [0xc8d90c]
+	chromedriver!(No symbol) [0xcaa7de]
+	chromedriver!(No symbol) [0xc8d6a6]
+	chromedriver!(No symbol) [0xc60029]
+	chromedriver!(No symbol) [0xc60de4]
+	chromedriver!GetHandleVerifier [0x10a4509+26d6c9]
+	chromedriver!GetHandleVerifier [0x109fb43+268d03]
+	chromedriver!GetHandleVerifier [0x10bd85b+286a1b]
+	chromedriver!GetHandleVerifier [0xe61668+2a828]
+	chromedriver!GetHandleVerifier [0xe697fd+329bd]
+	chromedriver!GetHandleVerifier [0xe50588+19748]
+	chromedriver!GetHandleVerifier [0xe50752+19912]
+	chromedriver!GetHandleVerifier [0xe399da+2b9a]
+	KERNEL32!BaseThreadInitThunk [0x75c35d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770cd81b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770cd7a1+231]
+. Trying Layer 2...
+[20:58:31]     [!] Layer 2 failed: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome=146.0.7680.80); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xe47c13+10dd3]
+	chromedriver!GetHandleVerifier [0xe47d44+10f04]
+	chromedriver!(No symbol) [0xc21f50]
+	chromedriver!(No symbol) [0xc28bbc]
+	chromedriver!(No symbol) [0xc2b0d2]
+	chromedriver!(No symbol) [0xcab521]
+	chromedriver!(No symbol) [0xc8d90c]
+	chromedriver!(No symbol) [0xcaa7de]
+	chromedriver!(No symbol) [0xc8d6a6]
+	chromedriver!(No symbol) [0xc60029]
+	chromedriver!(No symbol) [0xc60de4]
+	chromedriver!GetHandleVerifier [0x10a4509+26d6c9]
+	chromedriver!GetHandleVerifier [0x109fb43+268d03]
+	chromedriver!GetHandleVerifier [0x10bd85b+286a1b]
+	chromedriver!GetHandleVerifier [0xe61668+2a828]
+	chromedriver!GetHandleVerifier [0xe697fd+329bd]
+	chromedriver!GetHandleVerifier [0xe50588+19748]
+	chromedriver!GetHandleVerifier [0xe50752+19912]
+	chromedriver!GetHandleVerifier [0xe399da+2b9a]
+	KERNEL32!BaseThreadInitThunk [0x75c35d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770cd81b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770cd7a1+231]
+.
+[20:58:32]     [!] Custom dropdown Layer 1 failed. Trying Layer 2 (JS click)...
+[20:58:32]     [DROPDOWN] Q: 'Email address
+Email address' | Status: FAILED
+[20:58:33]     [>] Step 3 finished. Moving to next...
+[20:58:36]     [RADIO] Q: 'Have you completed the following level of education: Bachelor's Degree?
+Have you completed the following level of education: Bachelor's Degree?
+Required' | Type: text | A: 'Yes' | Source: AI Fallback -> Default(Yes)
+[20:58:39]     [>] Step 4 finished. Moving to next...
+[20:58:44]     [?] Submit clicked. Verifying success...
+[20:58:47]     [SUCCESS] Application confirmed: 'Your application was sent'.
+[20:58:55] [3/7] Power BI Developer @ Scoutit
+[20:58:55]     [APPLY] Similarity (0.26) satisfies threshold. Attempting Easy Apply...
+[20:58:58]   Easy Apply button detected. Clicking...
+[20:59:01]   Easy Apply wizard opened.
+[20:59:05]     [DROPDOWN] Q: 'Phone country code
+Phone country code' | A: '+91' | Source: AI Fallback
+[20:59:09]     [DROPDOWN] Q: 'Email address
+Email address' | A: 'saicharan@example.com' | Source: AI Fallback
+[20:59:13]     [>] Step 1 finished. Moving to next...
+[20:59:17]     [>] Step 2 finished. Moving to next...
+[20:59:26]     [DROPDOWN] Q: 'Month of From' | A: 'Jun' | Source: AI Fallback
+[20:59:31]     [DROPDOWN] Q: 'Year of From' | A: 'There is no information about "Year of From" in the provided resume. The resume does mention specific dates for work experience, education, and certifications, but it does not have a section or information labeled as "Year of From".' | Source: AI Fallback
+[20:59:34]     [DROPDOWN] Q: 'Month of To' | A: 'There is no information about "Month of To" in the provided resume. The resume does mention specific months for the internship (Jun 2022 – Nov 2022) and education (Aug 2019 – May 2023), but it does not provide information about "Month of To".' | Source: AI Fallback
+[20:59:39]     [DROPDOWN] Q: 'Year of To' | A: 'There is no information about "Year of To" in the provided resume. The question seems incomplete. However, if you're asking about the year the applicant is expected to graduate or complete their degree, according to the resume, the applicant is expected to complete their Bachelor of Technology (B.Tech) in May 2023.' | Source: AI Fallback
+[20:59:42]     [TEXT] Q: 'Your title' | A: 'Software Engineer Intern' | Source: AI Fallback
+[20:59:47]     [TEXT] Q: 'Company' | A: 'TCS (Tata Consultancy Services)' | Source: AI Fallback
+[20:59:53]     [TEXT] Q: 'City
+City' | A: 'Bangalore, Hyderabad' | Source: AI Fallback
+[21:00:00]     [TEXT] Q: 'Description' | A: 'There is no question provided. Please provide the recruiter's question, and I will answer based strictly on the resume text provided.' | Source: AI Fallback
+[21:00:10]     [>] Step 3 finished. Moving to next...
+[21:00:14]   Contact info error: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=146.0.7680.80)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xe47c13+10dd3]
+	chromedriver!GetHandleVerifier [0xe47d44+10f04]
+	chromedriver!(No symbol) [0xc21f50]
+	chromedriver!(No symbol) [0xc00a93]
+	chromedriver!(No symbol) [0xc9414b]
+	chromedriver!(No symbol) [0xcaa129]
+	chromedriver!(No symbol) [0xc8d6a6]
+	chromedriver!(No symbol) [0xc60029]
+	chromedriver!(No symbol) [0xc60de4]
+	chromedriver!GetHandleVerifier [0x10a4509+26d6c9]
+	chromedriver!GetHandleVerifier [0x109fb43+268d03]
+	chromedriver!GetHandleVerifier [0x10bd85b+286a1b]
+	chromedriver!GetHandleVerifier [0xe61668+2a828]
+	chromedriver!GetHandleVerifier [0xe697fd+329bd]
+	chromedriver!GetHandleVerifier [0xe50588+19748]
+	chromedriver!GetHandleVerifier [0xe50752+19912]
+	chromedriver!GetHandleVerifier [0xe399da+2b9a]
+	KERNEL32!BaseThreadInitThunk [0x75c35d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770cd81b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770cd7a1+231]
+
+[21:00:14]   Text input error: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=146.0.7680.80)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xe47c13+10dd3]
+	chromedriver!GetHandleVerifier [0xe47d44+10f04]
+	chromedriver!(No symbol) [0xc21f50]
+	chromedriver!(No symbol) [0xc00a93]
+	chromedriver!(No symbol) [0xc9414b]
+	chromedriver!(No symbol) [0xcaa129]
+	chromedriver!(No symbol) [0xc8d6a6]
+	chromedriver!(No symbol) [0xc60029]
+	chromedriver!(No symbol) [0xc60de4]
+	chromedriver!GetHandleVerifier [0x10a4509+26d6c9]
+	chromedriver!GetHandleVerifier [0x109fb43+268d03]
+	chromedriver!GetHandleVerifier [0x10bd85b+286a1b]
+	chromedriver!GetHandleVerifier [0xe61668+2a828]
+	chromedriver!GetHandleVerifier [0xe697fd+329bd]
+	chromedriver!GetHandleVerifier [0xe50588+19748]
+	chromedriver!GetHandleVerifier [0xe50752+19912]
+	chromedriver!GetHandleVerifier [0xe399da+2b9a]
+	KERNEL32!BaseThreadInitThunk [0x75c35d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770cd81b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770cd7a1+231]
+
+[21:00:14]     [!] Force fill error: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=146.0.7680.80)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xe47c13+10dd3]
+	chromedriver!GetHandleVerifier [0xe47d44+10f04]
+	chromedriver!(No symbol) [0xc21f50]
+	chromedriver!(No symbol) [0xc00a93]
+	chromedriver!(No symbol) [0xc9414b]
+	chromedriver!(No symbol) [0xcaa129]
+	chromedriver!(No symbol) [0xc8d6a6]
+	chromedriver!(No symbol) [0xc60029]
+	chromedriver!(No symbol) [0xc60de4]
+	chromedriver!GetHandleVerifier [0x10a4509+26d6c9]
+	chromedriver!GetHandleVerifier [0x109fb43+268d03]
+	chromedriver!GetHandleVerifier [0x10bd85b+286a1b]
+	chromedriver!GetHandleVerifier [0xe61668+2a828]
+	chromedriver!GetHandleVerifier [0xe697fd+329bd]
+	chromedriver!GetHandleVerifier [0xe50588+19748]
+	chromedriver!GetHandleVerifier [0xe50752+19912]
+	chromedriver!GetHandleVerifier [0xe399da+2b9a]
+	KERNEL32!BaseThreadInitThunk [0x75c35d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770cd81b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770cd7a1+231]
+
+[21:00:16]     [!] Safe click error: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=146.0.7680.80)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xe47c13+10dd3]
+	chromedriver!GetHandleVerifier [0xe47d44+10f04]
+	chromedriver!(No symbol) [0xc21f50]
+	chromedriver!(No symbol) [0xc00a93]
+	chromedriver!(No symbol) [0xc9414b]
+	chromedriver!(No symbol) [0xcaa129]
+	chromedriver!(No symbol) [0xc8d6a6]
+	chromedriver!(No symbol) [0xc60029]
+	chromedriver!(No symbol) [0xc60de4]
+	chromedriver!GetHandleVerifier [0x10a4509+26d6c9]
+	chromedriver!GetHandleVerifier [0x109fb43+268d03]
+	chromedriver!GetHandleVerifier [0x10bd85b+286a1b]
+	chromedriver!GetHandleVerifier [0xe61668+2a828]
+	chromedriver!GetHandleVerifier [0xe697fd+329bd]
+	chromedriver!GetHandleVerifier [0xe50588+19748]
+	chromedriver!GetHandleVerifier [0xe50752+19912]
+	chromedriver!GetHandleVerifier [0xe399da+2b9a]
+	KERNEL32!BaseThreadInitThunk [0x75c35d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770cd81b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770cd7a1+231]
+
+[21:00:16]     [!] Safe click error: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=146.0.7680.80)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xe47c13+10dd3]
+	chromedriver!GetHandleVerifier [0xe47d44+10f04]
+	chromedriver!(No symbol) [0xc21f50]
+	chromedriver!(No symbol) [0xc00a93]
+	chromedriver!(No symbol) [0xc9414b]
+	chromedriver!(No symbol) [0xcaa129]
+	chromedriver!(No symbol) [0xc8d6a6]
+	chromedriver!(No symbol) [0xc60029]
+	chromedriver!(No symbol) [0xc60de4]
+	chromedriver!GetHandleVerifier [0x10a4509+26d6c9]
+	chromedriver!GetHandleVerifier [0x109fb43+268d03]
+	chromedriver!GetHandleVerifier [0x10bd85b+286a1b]
+	chromedriver!GetHandleVerifier [0xe61668+2a828]
+	chromedriver!GetHandleVerifier [0xe697fd+329bd]
+	chromedriver!GetHandleVerifier [0xe50588+19748]
+	chromedriver!GetHandleVerifier [0xe50752+19912]
+	chromedriver!GetHandleVerifier [0xe399da+2b9a]
+	KERNEL32!BaseThreadInitThunk [0x75c35d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770cd81b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770cd7a1+231]
+
+[21:00:16]     [!] No 'Submit' or 'Next' button found. Form stuck.
+[21:00:18] Bot crashed: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=146.0.7680.80)
+Stacktrace:
+	chromedriver!GetHandleVerifier [0xe47c13+10dd3]
+	chromedriver!GetHandleVerifier [0xe47d44+10f04]
+	chromedriver!(No symbol) [0xc21f50]
+	chromedriver!(No symbol) [0xc00a93]
+	chromedriver!(No symbol) [0xc9414b]
+	chromedriver!(No symbol) [0xcaa129]
+	chromedriver!(No symbol) [0xc8d6a6]
+	chromedriver!(No symbol) [0xc60029]
+	chromedriver!(No symbol) [0xc60de4]
+	chromedriver!GetHandleVerifier [0x10a4509+26d6c9]
+	chromedriver!GetHandleVerifier [0x109fb43+268d03]
+	chromedriver!GetHandleVerifier [0x10bd85b+286a1b]
+	chromedriver!GetHandleVerifier [0xe61668+2a828]
+	chromedriver!GetHandleVerifier [0xe697fd+329bd]
+	chromedriver!GetHandleVerifier [0xe50588+19748]
+	chromedriver!GetHandleVerifier [0xe50752+19912]
+	chromedriver!GetHandleVerifier [0xe399da+2b9a]
+	KERNEL32!BaseThreadInitThunk [0x75c35d49+19]
+	ntdll!RtlInitializeExceptionChain [0x770cd81b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x770cd7a1+231]
+

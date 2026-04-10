@@ -1,0 +1,378 @@
+{% extends "base.html" %}
+{% block title %}Additional Questions{% endblock %}
+
+{% block content %}
+<div class="mb-8">
+  <!-- Header -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-extrabold text-slate-800">Additional Questions</h1>
+    <p class="text-slate-500 mt-2">Help AutoJob answer screening questions accurately and land your dream job.</p>
+  </div>
+
+  <!-- Profile Selector -->
+  <div class="mb-8">
+    <label class="block text-sm font-bold text-slate-700 mb-2">Select Profile Type</label>
+    <div class="segmented-control">
+      <button type="button" onclick="toggleProfileMode('fresher')" id="btn-mode-fresher"
+        class="tab-btn {% if not user.additional_info or user.additional_info.user_type == 'fresher' %}active{% endif %}">
+        Fresher
+      </button>
+      <button type="button" onclick="toggleProfileMode('experienced')" id="btn-mode-experienced"
+        class="tab-btn {% if user.additional_info and user.additional_info.user_type == 'experienced' %}active{% endif %}">
+        Experienced
+      </button>
+    </div>
+  </div>
+
+  <!-- Fresher Form -->
+  <form id="form-fresher"
+    class="{% if user.additional_info and user.additional_info.user_type != 'fresher' %}hidden{% endif %}">
+    <input type="hidden" name="user_type" value="fresher">
+
+    <div class="section-card">
+      <h3 class="section-title">
+        <svg class="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Basic Information
+      </h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Expected Salary</label>
+          <input type="text" name="expected_ctc"
+            value="{{ user.additional_info.expected_ctc if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. 8 LPA">
+        </div>
+        <div class="form-group">
+          <label>Preferred Location</label>
+          <input type="text" name="preferred_location"
+            value="{{ user.additional_info.preferred_location if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. Bangalore">
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h3 class="section-title">
+        <svg class="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17.657 16.657L13.414 20.914c-.05.05-.116.086-.182.112A.508.508 0 0113 21c-.066 0-.132-.016-.182-.086l-4.243-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        Address Details
+      </h3>
+      <div class="form-grid">
+        <div class="form-group sm:col-span-2">
+          <label>Street Address</label>
+          <input type="text" name="street_address"
+            value="{{ user.additional_info.street_address if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. 123 Main St, Apartment 4">
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" name="city"
+            value="{{ user.additional_info.city if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. Bangalore">
+        </div>
+        <div class="form-group">
+          <label>State</label>
+          <input type="text" name="state"
+            value="{{ user.additional_info.state if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. Karnataka">
+        </div>
+        <div class="form-group">
+          <label>Pin Code</label>
+          <input type="text" name="pincode"
+            value="{{ user.additional_info.pincode if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. 560001">
+        </div>
+        <div class="form-group">
+          <label>Country</label>
+          <input type="text" name="country"
+            value="{{ user.additional_info.country if user.additional_info else 'India' }}" class="saas-input"
+            placeholder="e.g. India">
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h3 class="section-title">
+        <svg class="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        Preferences
+      </h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Willing to Relocate?</label>
+          <select name="relocate" class="saas-select">
+            <option value="Yes" {% if user.additional_info and user.additional_info.relocate=='Yes' %}selected{% endif
+              %}>Yes</option>
+            <option value="No" {% if user.additional_info and user.additional_info.relocate=='No' %}selected{% endif %}>
+              No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Open to Remote?</label>
+          <select name="remote" class="saas-select">
+            <option value="Yes" {% if user.additional_info and user.additional_info.remote=='Yes' %}selected{% endif %}>
+              Yes</option>
+            <option value="No" {% if user.additional_info and user.additional_info.remote=='No' %}selected{% endif %}>No
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Onsite OK?</label>
+          <select name="onsite" class="saas-select">
+            <option value="Yes" {% if user.additional_info and user.additional_info.onsite=='Yes' %}selected{% endif %}>
+              Yes</option>
+            <option value="No" {% if user.additional_info and user.additional_info.onsite=='No' %}selected{% endif %}>No
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" onclick="saveAdditionalInfo('fresher')" class="btn-save shadow-lg">
+        Save Fresher Profile
+      </button>
+    </div>
+  </form>
+
+  <!-- Experienced Form -->
+  <form id="form-experienced"
+    class="{% if not user.additional_info or user.additional_info.user_type != 'experienced' %}hidden{% endif %}">
+    <input type="hidden" name="user_type" value="experienced">
+
+    <div class="section-card">
+      <h3 class="section-title">
+        <svg class="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        Experience Details
+      </h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Total Experience (Years)</label>
+          <input type="number" step="0.1" name="total_experience"
+            value="{{ user.additional_info.total_experience if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. 5.5">
+        </div>
+        <div class="form-group">
+          <label>Relevant Experience (Years)</label>
+          <input type="number" step="0.1" name="relevant_experience"
+            value="{{ user.additional_info.relevant_experience if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. 3">
+        </div>
+        <div class="form-group">
+          <label>Notice Period (Days)</label>
+          <input type="number" name="notice_period"
+            value="{{ user.additional_info.notice_period if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. 30">
+        </div>
+        <div class="form-group">
+          <div class="checkbox-group mt-8">
+            <input type="checkbox" id="serving_notice" name="serving_notice" value="Yes" {% if user.additional_info and
+              user.additional_info.serving_notice=='Yes' %}checked{% endif %}>
+            <label for="serving_notice">Currently Serving Notice?</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="section-card">
+      <h3 class="section-title">
+        <svg class="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Salary Details
+      </h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Current CTC</label>
+          <input type="text" name="current_ctc"
+            value="{{ user.additional_info.current_ctc if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. 15 LPA">
+        </div>
+        <div class="form-group">
+          <label>Expected CTC</label>
+          <input type="text" name="expected_ctc"
+            value="{{ user.additional_info.expected_ctc if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. 22 LPA">
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h3 class="section-title">
+        <svg class="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17.657 16.657L13.414 20.914c-.05.05-.116.086-.182.112A.508.508 0 0113 21c-.066 0-.132-.016-.182-.086l-4.243-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        Address Details
+      </h3>
+      <div class="form-grid">
+        <div class="form-group sm:col-span-2">
+          <label>Street Address</label>
+          <input type="text" name="street_address"
+            value="{{ user.additional_info.street_address if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. 123 Main St, Apartment 4">
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" name="city"
+            value="{{ user.additional_info.city if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. Bangalore">
+        </div>
+        <div class="form-group">
+          <label>State</label>
+          <input type="text" name="state"
+            value="{{ user.additional_info.state if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. Karnataka">
+        </div>
+        <div class="form-group">
+          <label>Pin Code</label>
+          <input type="text" name="pincode"
+            value="{{ user.additional_info.pincode if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. 560001">
+        </div>
+        <div class="form-group">
+          <label>Country</label>
+          <input type="text" name="country"
+            value="{{ user.additional_info.country if user.additional_info else 'India' }}" class="saas-input"
+            placeholder="e.g. India">
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h3 class="section-title">
+        <svg class="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17.657 16.657L13.414 20.914c-.05.05-.116.086-.182.112A.508.508 0 0113 21c-.066 0-.132-.016-.182-.086l-4.243-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        Preferences
+      </h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Preferred Location</label>
+          <input type="text" name="preferred_location"
+            value="{{ user.additional_info.preferred_location if user.additional_info else '' }}" class="saas-input"
+            placeholder="e.g. Remote / Bangalore">
+        </div>
+        <div class="form-group">
+          <label>Willing to Relocate?</label>
+          <select name="relocate" class="saas-select">
+            <option value="Yes" {% if user.additional_info and user.additional_info.relocate=='Yes' %}selected{% endif
+              %}>Yes</option>
+            <option value="No" {% if user.additional_info and user.additional_info.relocate=='No' %}selected{% endif %}>
+              No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Open to Remote?</label>
+          <select name="remote" class="saas-select">
+            <option value="Yes" {% if user.additional_info and user.additional_info.remote=='Yes' %}selected{% endif %}>
+              Yes</option>
+            <option value="No" {% if user.additional_info and user.additional_info.remote=='No' %}selected{% endif %}>No
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Onsite OK?</label>
+          <select name="onsite" class="saas-select">
+            <option value="Yes" {% if user.additional_info and user.additional_info.onsite=='Yes' %}selected{% endif %}>
+              Yes</option>
+            <option value="No" {% if user.additional_info and user.additional_info.onsite=='No' %}selected{% endif %}>No
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" onclick="saveAdditionalInfo('experienced')" class="btn-save shadow-lg">
+        Save Experienced Profile
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function toggleProfileMode(mode) {
+    const fresherForm = document.getElementById('form-fresher');
+    const experiencedForm = document.getElementById('form-experienced');
+    const btnFresher = document.getElementById('btn-mode-fresher');
+    const btnExperienced = document.getElementById('btn-mode-experienced');
+
+    if (mode === 'fresher') {
+      fresherForm.classList.remove('hidden');
+      experiencedForm.classList.add('hidden');
+      btnFresher.classList.add('active');
+      btnExperienced.classList.remove('active');
+    } else {
+      fresherForm.classList.add('hidden');
+      experiencedForm.classList.remove('hidden');
+      btnExperienced.classList.add('active');
+      btnFresher.classList.remove('active');
+    }
+  }
+
+  function saveAdditionalInfo(mode) {
+    const form = document.getElementById(`form-${mode}`);
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    // Handle checkbox for serving_notice
+    if (mode === 'experienced') {
+      data.serving_notice = form.querySelector('[name="serving_notice"]').checked ? 'Yes' : 'No';
+    }
+
+    const btn = event.currentTarget;
+    const originalContent = btn.innerHTML;
+    btn.innerHTML = '<span>Saving...</span>';
+    btn.disabled = true;
+
+    fetch('/save_additional_info', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(r => r.json())
+      .then(res => {
+        if (res.success) {
+          // Simple success state
+          btn.innerHTML = '<span>Saved ✓</span>';
+          btn.classList.add('bg-green-600', 'hover:bg-green-700');
+          setTimeout(() => {
+            btn.innerHTML = originalContent;
+            btn.classList.remove('bg-green-600', 'hover:bg-green-700');
+            btn.disabled = false;
+          }, 2000);
+        } else {
+          alert('Error: ' + res.message);
+          btn.innerHTML = originalContent;
+          btn.disabled = false;
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert('An error occurred.');
+        btn.innerHTML = originalContent;
+        btn.disabled = false;
+      });
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,53 @@
+[23:23:19]   [BEHAVIOR] Anti-detection mode: skip_heavy
+[23:23:34]   [PERSISTENCE] Logged in via cookies.
+[23:23:40]     [SCROLL] Could not find scrollable job list panel.
+[23:23:40] Bot crashed: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x337c13+10dd3]
+	chromedriver!GetHandleVerifier [0x337d44+10f04]
+	chromedriver!(No symbol) [0x111d8e]
+	chromedriver!(No symbol) [0x14f2b5]
+	chromedriver!(No symbol) [0x17d7c6]
+	chromedriver!(No symbol) [0x178c41]
+	chromedriver!(No symbol) [0x178262]
+	chromedriver!(No symbol) [0xe517e]
+	chromedriver!(No symbol) [0xe571e]
+	chromedriver!(No symbol) [0xe5bfd]
+	chromedriver!GetHandleVerifier [0x594509+26d6c9]
+	chromedriver!GetHandleVerifier [0x58fb43+268d03]
+	chromedriver!GetHandleVerifier [0x5ad85b+286a1b]
+	chromedriver!GetHandleVerifier [0x351668+2a828]
+	chromedriver!GetHandleVerifier [0x3597fd+329bd]
+	chromedriver!(No symbol) [0xe4ee9]
+	chromedriver!(No symbol) [0xe4530]
+	chromedriver!GetHandleVerifier [0x6ddc9f+3b6e5f]
+	KERNEL32!BaseThreadInitThunk [0x75905d49+19]
+	ntdll!RtlInitializeExceptionChain [0x7707d81b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x7707d7a1+231]
+	(No symbol) [(nil)]
+
+[23:23:40]     [!] Failed to capture debug: Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x337c13+10dd3]
+	chromedriver!GetHandleVerifier [0x337d44+10f04]
+	chromedriver!(No symbol) [0x111d8e]
+	chromedriver!(No symbol) [0x14f2b5]
+	chromedriver!(No symbol) [0x17d7c6]
+	chromedriver!(No symbol) [0x178c41]
+	chromedriver!(No symbol) [0x178262]
+	chromedriver!(No symbol) [0xe517e]
+	chromedriver!(No symbol) [0xe571e]
+	chromedriver!(No symbol) [0xe5bfd]
+	chromedriver!GetHandleVerifier [0x594509+26d6c9]
+	chromedriver!GetHandleVerifier [0x58fb43+268d03]
+	chromedriver!GetHandleVerifier [0x5ad85b+286a1b]
+	chromedriver!GetHandleVerifier [0x351668+2a828]
+	chromedriver!GetHandleVerifier [0x3597fd+329bd]
+	chromedriver!(No symbol) [0xe4ee9]
+	chromedriver!(No symbol) [0xe4530]
+	chromedriver!GetHandleVerifier [0x6ddc9f+3b6e5f]
+	KERNEL32!BaseThreadInitThunk [0x75905d49+19]
+	ntdll!RtlInitializeExceptionChain [0x7707d81b+6b]
+	ntdll!RtlGetAppContainerNamedObjectPath [0x7707d7a1+231]
+	(No symbol) [(nil)]
+

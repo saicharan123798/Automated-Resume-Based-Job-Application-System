@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+{% block title %}Bot Running{% endblock %}
+
+{% block content %}
+<div class="mb-8">
+  <h1 class="text-2xl font-extrabold text-slate-800">AutoJob Bot</h1>
+  <p class="text-slate-500 mt-1 text-sm">Control and monitor your automated job application bot in real-time.</p>
+</div>
+
+<!-- Controls + Live Stats Row -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-6">
+
+  <!-- Bot Control -->
+  <div class="card lg:col-span-1 flex flex-col">
+    <h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-5">Bot Control</h3>
+
+    <!-- Status Indicator -->
+    <div class="flex items-center gap-3 mb-6 p-3 rounded-xl bg-slate-50">
+      <div id="statusDot" class="w-3 h-3 rounded-full bg-slate-300 {% if user.bot_running %}bg-green-400 animate-pulse{% endif %}"></div>
+      <p id="statusMsg" class="text-sm font-medium text-slate-600">
+        {{ user.bot_status_message or ('Running…' if user.bot_running else 'Idle') }}
+      </p>
+    </div>
+
+    <!-- Readiness Checks -->
+    <div class="space-y-2 mb-6">
+      {% set checks = [
+        ('Resume uploaded', user.resume_pdf_path),
+        ('Role set', user.desired_role),
+        ('Location set', user.location),
+        ('LinkedIn credentials', user.linkedin_email and user.linkedin_password),
+      ] %}
+      {% for label, ok in checks %}
+      <div class="flex items-center gap-2 text-sm">
+        {% if ok %}
+        <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        <span class="text-slate-600">{{ label }}</span>
+        {% else %}
+        <svg class="w-4 h-4 text-red-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        <span class="text-red-500">{{ label }} missing</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    {% set all_ready = user.resume_pdf_path and user.desired_role and user.location and user.linkedin_email and user.linkedin_password %}
+
+    <button id="startBtn" onclick="startBot()"
+      {% if not all_ready or user.bot_running %}disabled{% endif %}
+      class="btn-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 mb-3">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <span id="startBtnText">{{ 'Bot Running…' if user.bot_running else 'START AUTO APPLY' }}</span>
+      <svg id="startSpinner" class="w-4 h-4 animate-spin {% if not user.bot_running %}hidden{% endif %}" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+      </svg>
+    </button>
+
+    <button id="stopBtn" onclick="stopBot()"
+      {% if not user.bot_running %}disabled{% endif %}
+      class="btn-secondary flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+      Stop Bot
+    </button>
+
+    {% if not all_ready %}
+    <p class="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mt-4">
+      Complete all setup steps before starting the bot.
+    </p>
+    {% endif %}
+  </div>
+
+  <!-- Live Stats -->
+  <div class="card lg:col-span-2">
+    <h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-5">Live Stats</h3>
+    <div class="grid grid-cols-3 gap-4 mb-6">
+      <div class="text-center p-4 bg-green-50 rounded-xl">
+        <p class="text-3xl font-extrabold text-green-600" id="liveApplied">{{ user.total_applied or 0 }}</p>
+        <p class="text-xs font-semibold text-green-500 uppercase tracking-widest mt-1">Applied</p>
+      </div>
+      <div class="text-center p-4 bg-blue-50 rounded-xl">
+        <p class="text-3xl font-extrabold text-blue-600" id="liveScanned">{{ user.total_scanned or 0 }}</p>
+        <p class="text-xs font-semibold text-blue-500 uppercase tracking-widest mt-1">Scanned</p>
+      </div>
+      <div class="text-center p-4 bg-amber-50 rounded-xl">
+        <p class="text-3xl font-extrabold text-amber-600" id="liveSkipped">{{ user.total_skipped or 0 }}</p>
+        <p class="text-xs font-semibold text-amber-500 uppercase tracking-widest mt-1">Skipped</p>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="mb-2 flex items-center justify-between text-xs font-medium text-slate-400">
+      <span>Progress (max 100 jobs)</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+      <div id="progressBar" class="h-full bg-gradient-to-r from-brand-500 to-brand-400 rounded-full transition-all duration-500" style="width:0%"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Live Log -->
+<div class="card">
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest">Bot Activity Log</h3>
+    <button onclick="clearLog()" class="text-xs text-slate-400 hover:text-slate-600 transition-colors">Clear</button>
+  </div>
+  <div id="logBox"
+    class="bg-slate-900 rounded-xl p-4 h-80 overflow-y-auto font-mono text-xs text-green-400 leading-relaxed space-y-0.5">
+    <p class="text-slate-500">Waiting for bot to start…</p>
+  </div>
+</div>
+
+<!-- Completion Modal -->
+<div id="completionModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center px-4">
+  <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl">
+    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+      <svg class="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    </div>
+    <h2 class="text-xl font-extrabold text-slate-800 mb-2">AutoJob Completed!</h2>
+    <p class="text-slate-500 text-sm mb-6" id="completionMsg">Bot has finished running.</p>
+    <a href="{{ url_for('dashboard') }}" class="btn-primary inline-block">View Dashboard</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let pollingInterval = null;
+let prevRunning = {{ 'true' if user.bot_running else 'false' }};
+
+function appendLog(lines) {
+  const box = document.getElementById('logBox');
+  lines.forEach(line => {
+    const p = document.createElement('p');
+    p.textContent = line;
+    if (line.includes('✅') || line.includes('completed')) p.classList.add('text-green-400');
+    else if (line.includes('❌') || line.includes('error') || line.includes('Error')) p.classList.add('text-red-400');
+    else if (line.includes('Skipping') || line.includes('skipped') || line.includes('Below')) p.classList.add('text-amber-400');
+    else p.classList.add('text-slate-300');
+    box.appendChild(p);
+  });
+  box.scrollTop = box.scrollHeight;
+}
+
+function clearLog() {
+  const box = document.getElementById('logBox');
+  box.innerHTML = '<p class="text-slate-500">Log cleared.</p>';
+}
+
+let lastLogCount = 0;
+
+function pollStatus() {
+  fetch('/api/bot_status')
+    .then(r => r.json())
+    .then(data => {
+      // Update stats
+      document.getElementById('liveApplied').textContent = data.total_applied;
+      document.getElementById('liveScanned').textContent = data.total_scanned;
+      document.getElementById('liveSkipped').textContent = data.total_skipped;
+
+      // Progress bar
+      const pct = Math.min(Math.round((data.total_scanned / 100) * 100), 100);
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('progressPct').textContent = pct + '%';
+
+      // Status
+      document.getElementById('statusMsg').textContent = data.status_message || (data.running ? 'Running…' : 'Idle');
+      const dot = document.getElementById('statusDot');
+      if (data.running) {
+        dot.className = 'w-3 h-3 rounded-full bg-green-400 animate-pulse';
+      } else {
+        dot.className = 'w-3 h-3 rounded-full bg-slate-300';
+      }
+
+      // Logs (append only new lines)
+      if (data.logs && data.logs.length > lastLogCount) {
+        const newLines = data.logs.slice(lastLogCount);
+        lastLogCount = data.logs.length;
+        if (lastLogCount === newLines.length) {
+          // First batch – clear placeholder
+          const box = document.getElementById('logBox');
+          if (box.querySelector('.text-slate-500')) box.innerHTML = '';
+        }
+        appendLog(newLines);
+      }
+
+      // Completion detection
+      if (prevRunning && !data.running) {
+        document.getElementById('completionMsg').textContent =
+          `AutoJob completed successfully. Applied to ${data.total_applied} jobs out of ${data.total_scanned} scanned.`;
+        document.getElementById('completionModal').classList.remove('hidden');
+        setButtonState(false);
+      }
+      prevRunning = data.running;
+    })
+    .catch(() => {});
+}
+
+function setButtonState(running) {
+  const startBtn = document.getElementById('startBtn');
+  const stopBtn  = document.getElementById('stopBtn');
+  const spinner  = document.getElementById('startSpinner');
+  const btnText  = document.getElementById('startBtnText');
+  if (running) {
+    startBtn.disabled = true;
+    stopBtn.disabled  = false;
+    spinner.classList.remove('hidden');
+    btnText.textContent = 'Bot Running…';
+  } else {
+    startBtn.disabled = false;
+    stopBtn.disabled  = true;
+    spinner.classList.add('hidden');
+    btnText.textContent = 'START AUTO APPLY';
+  }
+}
+
+function startBot() {
+  setButtonState(true);
+  lastLogCount = 0;
+  document.getElementById('logBox').innerHTML = '';
+  fetch('/start_bot', { method: 'POST', headers: {'Content-Type': 'application/json'} })
+    .then(r => r.json())
+    .then(data => {
+      if (!data.success) {
+        alert('Error: ' + data.message);
+        setButtonState(false);
+      } else {
+        prevRunning = true;
+        if (!pollingInterval) pollingInterval = setInterval(pollStatus, 2500);
+      }
+    })
+    .catch(e => { alert('Failed to start bot: ' + e); setButtonState(false); });
+}
+
+function stopBot() {
+  fetch('/stop_bot', { method: 'POST' })
+    .then(r => r.json())
+    .then(() => setButtonState(false))
+    .catch(() => {});
+}
+
+// Start polling immediately if bot is running
+{% if user.bot_running %}
+pollingInterval = setInterval(pollStatus, 2500);
+{% endif %}
+</script>
+{% endblock %}
